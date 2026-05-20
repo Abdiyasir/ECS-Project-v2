@@ -14,3 +14,4 @@ A URL shortener with click analytics on AWS. Three services, one cluster. The ap
 
 ---
 
+Project is currently ongoing
