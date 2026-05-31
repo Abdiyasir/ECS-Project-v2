@@ -28,4 +28,5 @@ A URL shortener with click analytics on AWS. Three services, one cluster. The ap
 - Terraform with remote state
 - Multi-stage Docker builds
 
-Project is currently ongoing
+
+## Project is currently ongoing
