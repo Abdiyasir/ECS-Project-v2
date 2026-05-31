@@ -16,6 +16,12 @@ FROM debian:bookworm-slim AS runtime
 
 WORKDIR /worker
 
+# Install trusted CA certificates
+RUN apt-get update && \
+    apt-get install -y ca-certificates && \
+    update-ca-certificates && \
+    rm -rf /var/lib/apt/lists/*
+
 RUN groupadd -r appuser && useradd -r -g appuser appuser
 RUN chown -R appuser:appuser /worker
 
