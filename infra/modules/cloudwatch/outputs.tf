@@ -1,3 +1,7 @@
-output "log_group_arn" {
-  value = aws_cloudwatch_log_group.log_group.arn
+output "waf_log_group" {
+  value = aws_cloudwatch_log_group.waf_log_group.arn
+}
+
+output "ecs_log_group" {
+  value = aws_cloudwatch_log_group.ecs_log_group.name
 }

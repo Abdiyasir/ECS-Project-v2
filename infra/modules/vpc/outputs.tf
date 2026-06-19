@@ -32,3 +32,23 @@ output "redis_sg" {
   description = "Redis Security Group ID"
   value = aws_security_group.redis_sg.id
 }
+
+output "alb_sg" {
+  description = "ALB Security Group"
+  value = aws_security_group.alb_sg.id
+}
+
+output "api_sg" {
+  description = "API Security Group"
+  value = aws_security_group.api_sg.id
+}
+
+output "worker_sg" {
+  description = "Worker Security Group"
+  value = aws_security_group.worker_sg.id
+}
+
+output "dashboard_sg" {
+  description = "Worker Security Group"
+  value = aws_security_group.dashboard_sg.id
+}

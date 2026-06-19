@@ -125,15 +125,98 @@ variable "redis_name" {
 
 }
 
-variable "log_group_name" {
-  type = string
-  description = "Cloudwatch Log Group Name"
-  
-}
-
 variable "retention_days" {
     type = number
     description = "Log retention time in days"
   
 }
 
+variable "bucket_name" {
+    type = string
+    description = "S3 Bucket Name"
+  
+}
+
+variable "env" {
+  type = string         
+  description = "Project Environment"
+}
+
+variable "image_tag_mutability" {
+    type = string
+    description = "ECR Image Tag Mutability"
+  
+}
+
+variable "api_repo" {
+    type = string
+    description = "API ECR Repo Name"
+  
+}
+
+variable "worker_repo" {
+    type = string
+    description = "Worker ECR Repo Name"
+  
+}
+
+variable "dashboard_repo" {
+    type = string
+    description = "Dashboard ECR Repo Name"
+  
+}
+
+variable "dns_name" {
+  type = string
+  description = "DNS Name"
+}
+
+variable "alb_name" {
+    type = string
+    description = "ALB Name"
+}
+
+variable "cluster_name" {
+  type = string
+  description = "ECS Cluster Name"
+}
+
+variable "task_count" {
+  type = number
+  description = "How many tasks running"
+}
+
+variable "cpu" {
+  type = number
+  description = "CPU required"
+}
+
+variable "memory" {
+  type = number
+  description = "Memory required"
+}
+
+variable "base_url" {
+  type = string
+  description = "URL being used as a base for the shortener"
+}
+
+variable "aws_region" {
+  type = string
+  description = "AWS Region"
+}
+
+variable "api_uri" {
+  type = string
+  description = "API ECR Repo URI"
+}
+
+variable "worker_uri" {
+  type = string
+  description = "Worker ECR Repo URI"
+}
+
+variable "dashboard_uri" {
+  type = string
+  description = "Dashboard ECR Repo URI"
+}

@@ -1,18 +1,18 @@
 variable "redis_sg_id" {
-  type        = number
+  type        = string
   description = "Redis Security Group ID"
 
 }
 
 variable "private_subnet_1" {
-  type        = number
+  type        = string
   description = "Private Subnet 1"
 
 }
 
 
 variable "private_subnet_2" {
-  type        = number
+  type        = string
   description = "Private Subnet 2"
 
 }

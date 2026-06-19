@@ -21,7 +21,7 @@ resource "aws_elasticache_serverless_cache" "redis" {
     var.redis_sg_id
   ]
 
-  subnet_ids = [var.private_subnet_1.id, var.private_subnet_2.id]
+  subnet_ids = [var.private_subnet_1, var.private_subnet_2]
 
   snapshot_retention_limit = 1
 

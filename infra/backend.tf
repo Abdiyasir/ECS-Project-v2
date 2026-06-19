@@ -1,9 +1,9 @@
 terraform {
     backend "s3" {
-    bucket         	   = "url-shortener-state"
+    bucket         	   = "url-s3-156165"
     key              	   = "prod/terraform.tfstate"
     region         	   = "eu-west-2"
     encrypt        	   = true
-    dynamodb_table = "url-shortener-lock"
+    use_lockfile       = true
   }
 }

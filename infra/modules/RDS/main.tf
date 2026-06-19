@@ -1,10 +1,7 @@
 resource "aws_db_subnet_group" "rds_subnet_group" {
   name = "url-shortener-rds-subnet-group"
 
-  subnet_ids = [
-    var.private_1.id,
-    var.private_2.id
-  ]
+  subnet_ids = [ var.private_subnet_1, var.private_subnet_2]
 
   tags = {
     Name = "RDS Subnet Group"
@@ -17,7 +14,7 @@ resource "aws_db_instance" "rds" {
   db_name = var.db_name
 
   engine         = "postgres"
-  engine_version = "17.4"
+  engine_version = "17"
 
   instance_class = var.instance_class
 
@@ -25,7 +22,7 @@ resource "aws_db_instance" "rds" {
   password = var.db_password
 
   vpc_security_group_ids = [
-    var.rds_sg.id
+    var.rds_sg
   ]
 
   db_subnet_group_name = aws_db_subnet_group.rds_subnet_group.name

@@ -5,7 +5,7 @@ resource "random_password" "db_password" {
 }
 
 resource "aws_secretsmanager_secret" "database_url" {
-  name = "url-shortener-db-password"
+  name = "rds-password"
 }
 
 resource "aws_secretsmanager_secret_version" "database_url" {
