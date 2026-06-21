@@ -1,0 +1,54 @@
+name: Terraform Plan
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "infra/**"
+
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+
+env:
+  AWS_REGION: eu-west-2
+  TF_WORKING_DIR: infra
+
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      -  name: Configure AWS Credentials
+         uses: aws-actions/configure-aws-credentials@v4
+         with:
+          audience: sts.amazonaws.com
+          aws-region: eu-west-2
+          role-to-assume: arn:aws:iam::306758374042:role/cicd-role
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Terraform Init
+        working-directory: ./infra
+        run: terraform init
+
+      - name: Terraform Format Check
+        working-directory: ./infra
+        run: terraform fmt -check -recursive
+
+      - name: Terraform Validate
+        working-directory: ./infra
+        run: terraform validate
+
+      - name: Terraform Plan
+        working-directory: ./infra
+        run: terraform plan -input=false -no-color
+
+
