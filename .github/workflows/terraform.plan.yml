@@ -25,9 +25,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      -  name: Configure AWS Credentials
-         uses: aws-actions/configure-aws-credentials@v4
-         with:
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
           audience: sts.amazonaws.com
           aws-region: eu-west-2
           role-to-assume: arn:aws:iam::306758374042:role/cicd-role
