@@ -58,8 +58,8 @@ resource "aws_iam_policy" "cicd_s3_policy" {
           "s3:DeleteObject"
         ]
         Resource = "arn:aws:s3:::url-s3-156165/prod/*"
-      }, 
-      { 
+      },
+      {
         Sid    = "AllowRoute53Access"
         Effect = "Allow"
         Action = [
@@ -68,7 +68,7 @@ resource "aws_iam_policy" "cicd_s3_policy" {
           "route53:ListResourceRecordSets",
           "route53:ChangeResourceRecordSets"
         ]
-        Resource = "*" 
+        Resource = "*"
       }
     ]
   })
