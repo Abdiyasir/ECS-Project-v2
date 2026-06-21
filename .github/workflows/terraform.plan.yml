@@ -51,8 +51,15 @@ jobs:
 
       - name: Terraform Plan
         working-directory: ./infra
-
-        run: terraform plan -input=false -no-color
+        run: |
+          terraform plan -input=false -no-color > plan.out 2>&1 || true
+          if grep -q "Error:" plan.out; then
+            echo "❌ TERRAFORM PLAN FAILED! HERE IS THE ERROR:"
+            sed -n '/Error:/,$p' plan.out
+            exit 1
+          else
+            cat plan.out
+          fi
         env:
           TF_VAR_db_name: ${{ secrets.DB_NAME }}
           TF_VAR_rds_username: ${{ secrets.RDS_USERNAME }}
