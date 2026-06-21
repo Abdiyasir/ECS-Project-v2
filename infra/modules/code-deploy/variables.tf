@@ -6,7 +6,7 @@ variable "codedeploy_role_arn" {
 variable "cluster_name" {
   type        = string
   description = "ECS Cluster Name"
-  default = "url-cluster"
+  default     = "url-cluster"
 }
 
 variable "https_listener_arn" {

@@ -24,7 +24,7 @@ variable "cluster_id" {
 variable "task_count" {
   type        = number
   description = "How many tasks running"
-  default = 2
+  default     = 2
 }
 
 variable "api_port" {
@@ -49,13 +49,13 @@ variable "listener_arn" {
 variable "cpu" {
   type        = number
   description = "CPU required"
-  default = 256
+  default     = 256
 }
 
 variable "memory" {
   type        = number
   description = "Memory required"
-  default = 512
+  default     = 512
 }
 
 variable "ecs_task_execution_role_arn" {
@@ -73,13 +73,13 @@ variable "ecs_task_role_arn" {
 variable "api_uri" {
   type        = string
   description = "API ECR Repo URI"
-  default = "306758374042.dkr.ecr.eu-west-2.amazonaws.com/api_ecr:v1"
+  default     = "306758374042.dkr.ecr.eu-west-2.amazonaws.com/api_ecr:v1"
 }
 
 variable "base_url" {
   type        = string
   description = "URL being used as a base for the shortener"
-  default = "https://abdiyasir-ecsv2.org"
+  default     = "https://abdiyasir-ecsv2.org"
 }
 
 variable "redis_url" {
@@ -95,7 +95,7 @@ variable "ecs_log_group" {
 variable "aws_region" {
   type        = string
   description = "AWS Region"
-  default = "eu-west-2"
+  default     = "eu-west-2"
 }
 
 variable "worker_sg" {
@@ -106,7 +106,7 @@ variable "worker_sg" {
 variable "worker_uri" {
   type        = string
   description = "Worker ECR Repo URI"
-  default = "306758374042.dkr.ecr.eu-west-2.amazonaws.com/worker_ecr:v1"
+  default     = "306758374042.dkr.ecr.eu-west-2.amazonaws.com/worker_ecr:v1"
 }
 
 variable "sqs_queue_url" {
@@ -127,7 +127,7 @@ variable "dashboard_sg" {
 variable "dashboard_uri" {
   type        = string
   description = "Dashboard ECR Repo URI"
-  default = "306758374042.dkr.ecr.eu-west-2.amazonaws.com/dashboard_ecr:v1"
+  default     = "306758374042.dkr.ecr.eu-west-2.amazonaws.com/dashboard_ecr:v1"
 }
 
 variable "dashboard_tg" {

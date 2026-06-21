@@ -50,5 +50,9 @@ jobs:
       - name: Terraform Plan
         working-directory: ./infra
         run: terraform plan -input=false -no-color
+        env:
+          TF_VAR_db_name: ${{ secrets.DB_NAME }}
+          TF_VAR_rds_username: ${{ secrets.RDS_USERNAME }}
+
 
 
