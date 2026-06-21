@@ -4,6 +4,6 @@ output "db_password" {
 }
 
 output "secret_arn" {
-  value     = aws_secretsmanager_secret.database_url.arn
+  value       = aws_secretsmanager_secret.database_url.arn
   description = "Database URL"
 }

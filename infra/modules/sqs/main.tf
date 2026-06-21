@@ -3,8 +3,8 @@ resource "aws_sqs_queue" "sqs_queue" {
 
   visibility_timeout_seconds = var.timeout_seconds
   message_retention_seconds  = var.message_retention
-  receive_wait_time_seconds  =var.wait_time
-  max_message_size = var.max_size
+  receive_wait_time_seconds  = var.wait_time
+  max_message_size           = var.max_size
 
   tags = {
     Name = "Click Events Queue"

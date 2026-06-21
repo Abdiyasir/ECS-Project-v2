@@ -4,8 +4,8 @@ resource "aws_ecs_service" "api" {
   task_definition = aws_ecs_task_definition.api_task.arn
   desired_count   = var.task_count
 
-  launch_type      = "FARGATE"
-  platform_version = "LATEST"
+  launch_type                       = "FARGATE"
+  platform_version                  = "LATEST"
   health_check_grace_period_seconds = 60
 
 
@@ -25,15 +25,15 @@ resource "aws_ecs_service" "api" {
     container_port   = var.api_port
   }
 
-depends_on = [var.listener_arn]
+  depends_on = [var.listener_arn]
 
-lifecycle {
-  ignore_changes = [
-    task_definition,
-    load_balancer,
-    platform_version
-  ]
-}
+  lifecycle {
+    ignore_changes = [
+      task_definition,
+      load_balancer,
+      platform_version
+    ]
+  }
 
 }
 
@@ -60,30 +60,30 @@ resource "aws_ecs_task_definition" "api_task" {
       ]
 
       environment = [
-  {
-    name  = "SQS_QUEUE_URL"
-    value = var.sqs_queue_url
-  },
-  {
-    name  = "REDIS_URL"
-    value = var.redis_url
-  },
-  {
-    name  = "BASE_URL"
-    value = var.base_url
-  },
-  {
-    name  = "CACHE_TTL_SECONDS"
-    value = "300"
-  }
-]
+        {
+          name  = "SQS_QUEUE_URL"
+          value = var.sqs_queue_url
+        },
+        {
+          name  = "REDIS_URL"
+          value = var.redis_url
+        },
+        {
+          name  = "BASE_URL"
+          value = var.base_url
+        },
+        {
+          name  = "CACHE_TTL_SECONDS"
+          value = "300"
+        }
+      ]
 
-secrets = [
-  {
-    name      = "DATABASE_URL"
-    valueFrom = var.database_secret_arn
-  }
-]
+      secrets = [
+        {
+          name      = "DATABASE_URL"
+          valueFrom = var.database_secret_arn
+        }
+      ]
 
       logConfiguration = {
         logDriver = "awslogs"
@@ -130,18 +130,18 @@ resource "aws_ecs_task_definition" "worker_task" {
       essential = true
 
       environment = [
-  {
-    name  = "SQS_QUEUE_URL"
-    value = var.sqs_queue_url
-  }
-]
+        {
+          name  = "SQS_QUEUE_URL"
+          value = var.sqs_queue_url
+        }
+      ]
 
-secrets = [
-  {
-    name      = "DATABASE_URL"
-    valueFrom = var.database_secret_arn
-  }
-]
+      secrets = [
+        {
+          name      = "DATABASE_URL"
+          valueFrom = var.database_secret_arn
+        }
+      ]
 
       logConfiguration = {
         logDriver = "awslogs"
@@ -161,8 +161,8 @@ resource "aws_ecs_service" "dashboard" {
   task_definition = aws_ecs_task_definition.dashboard_task.arn
   desired_count   = var.task_count
 
-  launch_type      = "FARGATE"
-  platform_version = "LATEST"
+  launch_type                       = "FARGATE"
+  platform_version                  = "LATEST"
   health_check_grace_period_seconds = 60
 
 
@@ -178,7 +178,7 @@ resource "aws_ecs_service" "dashboard" {
     container_port   = var.dashboard_port
   }
 
-depends_on = [var.listener_arn]
+  depends_on = [var.listener_arn]
 
 }
 
@@ -206,10 +206,10 @@ resource "aws_ecs_task_definition" "dashboard_task" {
 
       secrets = [
         {
-          name  = "DATABASE_URL"
+          name      = "DATABASE_URL"
           valueFrom = var.database_secret_arn
         },
-        
+
       ]
 
       logConfiguration = {

@@ -1,26 +1,26 @@
 output "tg_blue" {
   description = "Blue Target Group ARN"
-  value = aws_lb_target_group.blue.arn
+  value       = aws_lb_target_group.blue.arn
 }
 
 output "tg_green" {
   description = "Green Target Group ARN"
-  value = aws_lb_target_group.green.arn
+  value       = aws_lb_target_group.green.arn
 }
 
 output "tg_blue_name" {
   description = "Blue Target Group Name"
-  value = aws_lb_target_group.blue.name
+  value       = aws_lb_target_group.blue.name
 }
 
 output "tg_green_name" {
   description = "Green Target Group Name"
-  value = aws_lb_target_group.green.name
+  value       = aws_lb_target_group.green.name
 }
 
 output "alb_dns_name" {
   description = "ALB Public URL"
-  value = aws_lb.url_alb.dns_name
+  value       = aws_lb.url_alb.dns_name
 }
 
 output "alb_zone_id" {
@@ -30,7 +30,7 @@ output "alb_zone_id" {
 
 output "alb_arn" {
   description = "ALB ARN"
-  value = aws_lb.url_alb.arn
+  value       = aws_lb.url_alb.arn
 }
 
 output "listener_arn" {
@@ -39,5 +39,5 @@ output "listener_arn" {
 
 output "dashboard_tg" {
   description = "Green Target Group ARN"
-  value = aws_lb_target_group.dashboard.arn
+  value       = aws_lb_target_group.dashboard.arn
 }

@@ -1,10 +1,10 @@
 variable "alb_name" {
-    type = string
-    description = "ALB Name"
+  type        = string
+  description = "ALB Name"
 }
 
 variable "alb_sg" {
-  type = string
+  type        = string
   description = "ALB Security Group"
 }
 
@@ -27,16 +27,16 @@ variable "api_port" {
 }
 
 variable "vpc_id" {
-  type = string
+  type        = string
   description = "The ID of the newly created VPC"
 }
 
 variable "certificate_arn" {
-  type = string
+  type        = string
   description = "ACM Certificate ARN"
 }
 
 variable "dashboard_port" {
-  type = string
+  type        = string
   description = "Dashboard Port"
 }

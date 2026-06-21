@@ -1,9 +1,9 @@
 variable "dns_name" {
-  type = string
+  type        = string
   description = "DNS Name"
 }
 
 variable "zone_id" {
-  type = string
+  type        = string
   description = "Hosted Zone ID"
 }

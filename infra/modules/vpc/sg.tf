@@ -39,16 +39,16 @@ resource "aws_security_group_rule" "api_to_endpoint" {
   to_port                  = 443
   protocol                 = "tcp"
   security_group_id        = aws_security_group.api_sg.id
-  source_security_group_id = aws_security_group.endpoint_sg.id 
+  source_security_group_id = aws_security_group.endpoint_sg.id
 }
 
 resource "aws_security_group_rule" "api_to_s3" {
-  type                     = "egress"
-  from_port                = 443
-  to_port                  = 443
-  protocol                 = "tcp"
-  security_group_id        = aws_security_group.api_sg.id
-  prefix_list_ids          = [aws_vpc_endpoint.s3.prefix_list_id]
+  type              = "egress"
+  from_port         = 443
+  to_port           = 443
+  protocol          = "tcp"
+  security_group_id = aws_security_group.api_sg.id
+  prefix_list_ids   = [aws_vpc_endpoint.s3.prefix_list_id]
 
 }
 
@@ -64,25 +64,25 @@ resource "aws_security_group_rule" "worker_to_endpoint" {
   to_port                  = 443
   protocol                 = "tcp"
   security_group_id        = aws_security_group.worker_sg.id
-  source_security_group_id = aws_security_group.endpoint_sg.id 
+  source_security_group_id = aws_security_group.endpoint_sg.id
 }
 
-  resource "aws_security_group_rule" "worker_to_rds" {
+resource "aws_security_group_rule" "worker_to_rds" {
   type                     = "egress"
   from_port                = var.rds_port
   to_port                  = var.rds_port
   protocol                 = "tcp"
   security_group_id        = aws_security_group.worker_sg.id
-  source_security_group_id = aws_security_group.rds_sg.id 
+  source_security_group_id = aws_security_group.rds_sg.id
 }
 
-  resource "aws_security_group_rule" "worker_to_s3" {
-  type                     = "egress"
-  from_port                = 443
-  to_port                  = 443
-  protocol                 = "tcp"
-  security_group_id        = aws_security_group.worker_sg.id
-  prefix_list_ids = [aws_vpc_endpoint.s3.prefix_list_id]
+resource "aws_security_group_rule" "worker_to_s3" {
+  type              = "egress"
+  from_port         = 443
+  to_port           = 443
+  protocol          = "tcp"
+  security_group_id = aws_security_group.worker_sg.id
+  prefix_list_ids   = [aws_vpc_endpoint.s3.prefix_list_id]
 }
 
 
@@ -119,16 +119,16 @@ resource "aws_security_group_rule" "dashboard_to_endpoint" {
   security_group_id        = aws_security_group.dashboard_sg.id
   source_security_group_id = aws_security_group.endpoint_sg.id
 }
- 
+
 resource "aws_security_group_rule" "dashboard_to_s3" {
-  type                     = "egress"
-  from_port                = 443
-  to_port                  = 443
-  protocol                 = "tcp"
-  security_group_id        = aws_security_group.dashboard_sg.id
-  prefix_list_ids = [aws_vpc_endpoint.s3.prefix_list_id]
+  type              = "egress"
+  from_port         = 443
+  to_port           = 443
+  protocol          = "tcp"
+  security_group_id = aws_security_group.dashboard_sg.id
+  prefix_list_ids   = [aws_vpc_endpoint.s3.prefix_list_id]
 }
-  
+
 
 
 resource "aws_security_group" "endpoint_sg" {
@@ -162,13 +162,13 @@ resource "aws_security_group_rule" "endpoint_from_dashboard" {
   security_group_id        = aws_security_group.endpoint_sg.id
   source_security_group_id = aws_security_group.dashboard_sg.id
 }
-  
+
 resource "aws_security_group_rule" "endpoint_to_all" {
-  type                     = "egress"
-  from_port                = 0
-  to_port                  = 0
-  protocol                 = "-1"
-  security_group_id        = aws_security_group.endpoint_sg.id
+  type              = "egress"
+  from_port         = 0
+  to_port           = 0
+  protocol          = "-1"
+  security_group_id = aws_security_group.endpoint_sg.id
   cidr_blocks       = ["0.0.0.0/0"]
 }
 
@@ -188,7 +188,7 @@ resource "aws_security_group_rule" "redis_from_api" {
   security_group_id        = aws_security_group.redis_sg.id
   source_security_group_id = aws_security_group.api_sg.id
 }
-  
+
 
 
 resource "aws_security_group" "rds_sg" {
@@ -232,12 +232,12 @@ resource "aws_security_group" "alb_sg" {
 }
 
 resource "aws_security_group_rule" "alb_from_https" {
-  type                     = "ingress"
-  from_port                = 443
-  to_port                  = 443
-  protocol                 = "tcp"
-  security_group_id        = aws_security_group.alb_sg.id
-  cidr_blocks = ["0.0.0.0/0"]
+  type              = "ingress"
+  from_port         = 443
+  to_port           = 443
+  protocol          = "tcp"
+  security_group_id = aws_security_group.alb_sg.id
+  cidr_blocks       = ["0.0.0.0/0"]
 }
 
 resource "aws_security_group_rule" "alb_from_http" {
@@ -257,7 +257,7 @@ resource "aws_security_group_rule" "alb_to_api" {
   security_group_id        = aws_security_group.alb_sg.id
   source_security_group_id = aws_security_group.api_sg.id
 }
-  
+
 resource "aws_security_group_rule" "alb_to_dashboard" {
   type                     = "egress"
   from_port                = var.dashboard_port

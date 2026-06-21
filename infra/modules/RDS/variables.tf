@@ -17,8 +17,8 @@ variable "instance_class" {
 }
 
 variable "rds_username" {
-  type = string
-  description= "RDS Secret Username" 
+  type        = string
+  description = "RDS Secret Username"
 }
 
 variable "db_password" {
@@ -36,5 +36,5 @@ variable "private_subnet_2" {
 
 variable "rds_sg" {
   type = string
-  
+
 }

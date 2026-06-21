@@ -1,12 +1,12 @@
 resource "aws_vpc" "url_shortener" {
-  cidr_block = var.vpc_cidr
+  cidr_block           = var.vpc_cidr
   enable_dns_support   = true
   enable_dns_hostnames = true
 }
 
 resource "aws_subnet" "public_1" {
-  vpc_id     = aws_vpc.url_shortener.id
-  cidr_block = var.public_1_cidr
+  vpc_id            = aws_vpc.url_shortener.id
+  cidr_block        = var.public_1_cidr
   availability_zone = var.az_1
 
   tags = {
@@ -15,8 +15,8 @@ resource "aws_subnet" "public_1" {
 }
 
 resource "aws_subnet" "public_2" {
-  vpc_id     = aws_vpc.url_shortener.id
-  cidr_block = var.public_2_cidr
+  vpc_id            = aws_vpc.url_shortener.id
+  cidr_block        = var.public_2_cidr
   availability_zone = var.az_2
 
   tags = {
@@ -25,8 +25,8 @@ resource "aws_subnet" "public_2" {
 }
 
 resource "aws_subnet" "private_1" {
-  vpc_id     = aws_vpc.url_shortener.id
-  cidr_block = var.private_1_cidr
+  vpc_id            = aws_vpc.url_shortener.id
+  cidr_block        = var.private_1_cidr
   availability_zone = var.az_1
 
   tags = {
@@ -35,8 +35,8 @@ resource "aws_subnet" "private_1" {
 }
 
 resource "aws_subnet" "private_2" {
-  vpc_id     = aws_vpc.url_shortener.id
-  cidr_block = var.private_2_cidr
+  vpc_id            = aws_vpc.url_shortener.id
+  cidr_block        = var.private_2_cidr
   availability_zone = var.az_2
 
   tags = {

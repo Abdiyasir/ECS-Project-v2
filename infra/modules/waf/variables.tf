@@ -1,9 +1,9 @@
 variable "waf_log_group_arn" {
-  type = string
+  type        = string
   description = "WAF Cloudwatch Log Group ARN"
 }
 
 variable "alb_arn" {
-  type = string
+  type        = string
   description = "ALB ARN"
 }

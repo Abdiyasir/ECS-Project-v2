@@ -14,11 +14,11 @@ resource "aws_lb" "url_alb" {
 
 
 resource "aws_lb_target_group" "blue" {
-  name     = "tg-blue"
-  port     = var.api_port
-  protocol = "HTTP"
+  name        = "tg-blue"
+  port        = var.api_port
+  protocol    = "HTTP"
   target_type = "ip"
-  vpc_id   = var.vpc_id
+  vpc_id      = var.vpc_id
 
   health_check {
     path                = "/healthz"
@@ -29,16 +29,16 @@ resource "aws_lb_target_group" "blue" {
   }
 
   lifecycle {
-  create_before_destroy = true
-}
+    create_before_destroy = true
+  }
 }
 
 resource "aws_lb_target_group" "green" {
-  name     = "tg-green"
-  port     = var.api_port
-  protocol = "HTTP"
+  name        = "tg-green"
+  port        = var.api_port
+  protocol    = "HTTP"
   target_type = "ip"
-  vpc_id   = var.vpc_id
+  vpc_id      = var.vpc_id
 
   health_check {
     path                = "/healthz"
@@ -49,8 +49,8 @@ resource "aws_lb_target_group" "green" {
   }
 
   lifecycle {
-  create_before_destroy = true
-}
+    create_before_destroy = true
+  }
 }
 
 resource "aws_lb_target_group" "dashboard" {
@@ -81,16 +81,16 @@ resource "aws_lb_listener" "https" {
 
     forward {
       target_group {
-        arn    = aws_lb_target_group.blue.arn
+        arn = aws_lb_target_group.blue.arn
       }
     }
   }
 
   lifecycle {
-  ignore_changes = [
-    default_action
-  ]
-}
+    ignore_changes = [
+      default_action
+    ]
+  }
 }
 
 resource "aws_lb_listener_rule" "dashboard" {

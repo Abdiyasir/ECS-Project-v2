@@ -6,13 +6,13 @@ resource "aws_wafv2_web_acl" "WafWebAcl" {
     allow {}
   }
 
-visibility_config {
+  visibility_config {
     cloudwatch_metrics_enabled = true
     metric_name                = "WAF_Total_Metrics"
     sampled_requests_enabled   = true
   }
 
-rule {
+  rule {
     name     = "known_bad_inputs"
     priority = 0
     override_action {
@@ -31,7 +31,7 @@ rule {
     }
   }
 
-rule {
+  rule {
     name     = "ip_reputation_list"
     priority = 10
     override_action {
@@ -50,7 +50,7 @@ rule {
     }
   }
 
-rule {
+  rule {
     name     = "common_rules"
     priority = 20
     override_action {
@@ -95,13 +95,13 @@ rule {
       managed_rule_group_statement {
         name        = "AWSManagedRulesSQLiRuleSet"
         vendor_name = "AWS"
-    
+
       }
     }
 
     visibility_config {
       cloudwatch_metrics_enabled = true
-      metric_name                = "sql_injection_metrics" 
+      metric_name                = "sql_injection_metrics"
       sampled_requests_enabled   = true
     }
   }
@@ -109,7 +109,7 @@ rule {
 
 resource "aws_wafv2_web_acl_logging_configuration" "waf_logging_config" {
   log_destination_configs = [var.waf_log_group_arn]
-  resource_arn = aws_wafv2_web_acl.WafWebAcl.arn
+  resource_arn            = aws_wafv2_web_acl.WafWebAcl.arn
 
   redacted_fields {
     uri_path {}

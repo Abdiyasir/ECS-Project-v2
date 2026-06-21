@@ -1,6 +1,6 @@
 variable "rds_username" {
-  type = string
-  description= "RDS Secret Username" 
+  type        = string
+  description = "RDS Secret Username"
 }
 
 variable "db_name" {
