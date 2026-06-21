@@ -1,7 +1,7 @@
 variable "rds_storage" {
   type        = number
   description = "RDS allocated storage"
-  default = 20
+  default     = 20
 
 }
 
@@ -14,7 +14,7 @@ variable "db_name" {
 variable "instance_class" {
   type        = string
   description = "RDS instance class"
-  default = "db.t4g.micro"
+  default     = "db.t4g.micro"
 
 }
 

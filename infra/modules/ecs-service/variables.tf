@@ -29,7 +29,7 @@ variable "task_count" {
 variable "api_port" {
   type        = number
   description = "API Port"
-  default = 8080
+  default     = 8080
 
 }
 
@@ -37,7 +37,7 @@ variable "api_port" {
 variable "dashboard_port" {
   type        = number
   description = "Dashboard Port"
-  default = 8081
+  default     = 8081
 }
 
 variable "listener_arn" {

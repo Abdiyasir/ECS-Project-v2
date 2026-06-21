@@ -20,13 +20,13 @@ variable "private_subnet_2" {
 variable "engine_name" {
   type        = string
   description = "Engine Name"
-  default = "redis"
+  default     = "redis"
 
 }
 
 variable "redis_name" {
   type        = string
   description = "Redis name"
-  default = "redis"
+  default     = "redis"
 
 }
