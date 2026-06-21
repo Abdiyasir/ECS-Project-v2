@@ -1,3 +1,8 @@
+data "aws_route53_zone" "hosted_zone" {
+  name         = var.dns_name
+  private_zone = false
+}
+
 resource "aws_acm_certificate" "cert" {
   domain_name       = var.dns_name
   validation_method = "DNS"
@@ -21,7 +26,7 @@ resource "aws_route53_record" "www" {
   records         = [each.value.record]
   ttl             = 60
   type            = each.value.type
-  zone_id         = var.zone_id
+  zone_id         = data.aws_route53_zone.acm_hosted_zone.zone_id
 }
 
 resource "aws_acm_certificate_validation" "cert" {
