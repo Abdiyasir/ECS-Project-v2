@@ -66,7 +66,8 @@ resource "aws_iam_policy" "cicd_s3_policy" {
           "route53:ListHostedZones",
           "route53:GetHostedZone",
           "route53:ListResourceRecordSets",
-          "route53:ChangeResourceRecordSets"
+          "route53:ChangeResourceRecordSets",
+          "route53:ListTagsForResource"
         ]
         Resource = "*"
       }
