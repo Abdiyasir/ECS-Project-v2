@@ -1,6 +1,7 @@
 variable "alb_name" {
   type        = string
   description = "ALB Name"
+  default = "url-alb"
 }
 
 variable "alb_sg" {
@@ -23,7 +24,7 @@ variable "public_subnet_2" {
 variable "api_port" {
   type        = number
   description = "API Port"
-
+  default = 8080
 }
 
 variable "vpc_id" {
@@ -37,6 +38,7 @@ variable "certificate_arn" {
 }
 
 variable "dashboard_port" {
-  type        = string
+  type        = number
   description = "Dashboard Port"
+  default = 8081
 }
