@@ -24,7 +24,7 @@ module "sqs" {
 }
 
 module "rds" {
-  source = "./modules/rds"
+  source = "./modules/RDS"
   rds_storage = var.rds_storage
   rds_username = var.rds_username
   db_name = var.db_name
