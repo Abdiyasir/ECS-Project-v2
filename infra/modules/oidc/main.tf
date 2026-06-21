@@ -36,7 +36,7 @@ resource "aws_iam_role_policy_attachment" "cicd_attachment" {
 
 resource "aws_iam_policy" "cicd_s3_policy" {
   name        = "cicd-s3-state-policy"
-  description = "Grants permissions for S3 remote state and native state locking"
+  description = "Grants permissions for S3 remote state, native state locking, and Route53 validations"
 
   policy = jsonencode({
     Version = "2012-10-17"
@@ -58,10 +58,22 @@ resource "aws_iam_policy" "cicd_s3_policy" {
           "s3:DeleteObject"
         ]
         Resource = "arn:aws:s3:::url-s3-156165/prod/*"
+      }, 
+      { 
+        Sid    = "AllowRoute53Access"
+        Effect = "Allow"
+        Action = [
+          "route53:ListHostedZones",
+          "route53:GetHostedZone",
+          "route53:ListResourceRecordSets",
+          "route53:ChangeResourceRecordSets"
+        ]
+        Resource = "*" 
       }
     ]
   })
 }
+
 
 resource "aws_iam_role_policy_attachment" "cicd_s3_policy_attachment" {
   role       = aws_iam_role.cicd_role.name
