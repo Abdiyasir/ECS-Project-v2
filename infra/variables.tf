@@ -208,44 +208,53 @@ variable "alb_name" {
 variable "cluster_name" {
   type        = string
   description = "ECS Cluster Name"
+  default = "url-cluster"
 }
 
 variable "task_count" {
   type        = number
   description = "How many tasks running"
+  default = 2
 }
 
 variable "cpu" {
   type        = number
   description = "CPU required"
+  default = 256
 }
 
 variable "memory" {
   type        = number
   description = "Memory required"
+  default = 512
 }
 
 variable "base_url" {
   type        = string
   description = "URL being used as a base for the shortener"
+  default = "https://abdiyasir-ecsv2.org"
 }
 
 variable "aws_region" {
   type        = string
   description = "AWS Region"
+  default = "eu-west-2"
 }
 
 variable "api_uri" {
   type        = string
   description = "API ECR Repo URI"
+  default = "306758374042.dkr.ecr.eu-west-2.amazonaws.com/api_ecr:v1"
 }
 
 variable "worker_uri" {
   type        = string
   description = "Worker ECR Repo URI"
+  default = "306758374042.dkr.ecr.eu-west-2.amazonaws.com/worker_ecr:v1"
 }
 
 variable "dashboard_uri" {
   type        = string
   description = "Dashboard ECR Repo URI"
+  default = "306758374042.dkr.ecr.eu-west-2.amazonaws.com/dashboard_ecr:v1"
 }
