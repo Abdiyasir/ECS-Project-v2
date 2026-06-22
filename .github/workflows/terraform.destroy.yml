@@ -1,12 +1,5 @@
-name: Terraform Plan Pipeline
-
+name: Terraform Destroy Pipeline
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - "infra/**"
-
   workflow_dispatch:
 
 permissions:
@@ -18,9 +11,8 @@ env:
   TF_WORKING_DIR: infra
 
 jobs:
-  plan:
+  destroy:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -41,24 +33,16 @@ jobs:
         working-directory: ./infra
         run: terraform init
 
-      - name: Terraform Format Check
+      - name: Terraform Destroy Plan
         working-directory: ./infra
-        run: terraform fmt -check -recursive
-
-      - name: Terraform Validate
-        working-directory: ./infra
-        run: terraform validate
-
-      - name: Terraform Plan
-        working-directory: ./infra
-        run: terraform plan -input=false -no-color
+        run: terraform plan "-destroy" "-input=false" "-no-color"
         env:
           TF_VAR_db_name: ${{ secrets.DB_NAME }}
           TF_VAR_rds_username: ${{ secrets.RDS_USERNAME }}
 
-      - name: Terraform Apply
+      - name: Terraform Destroy Apply
         working-directory: ./infra
-        run: terraform apply "-auto-approve" "-input=false"
+        run: terraform destroy "-auto-approve" "-input=false"
         env:
           TF_VAR_db_name: ${{ secrets.DB_NAME }}
           TF_VAR_rds_username: ${{ secrets.RDS_USERNAME }}
