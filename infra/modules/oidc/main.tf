@@ -42,7 +42,7 @@ resource "aws_iam_policy" "cicd_s3_policy" {
     Version = "2012-10-17"
     Statement = [
       {
-        Sid    = "AllowBucketListing"
+        Sid    = "AllowTerraformStateBucketAccess"
         Effect = "Allow"
         Action = [
           "s3:ListBucket"
@@ -50,7 +50,7 @@ resource "aws_iam_policy" "cicd_s3_policy" {
         Resource = "arn:aws:s3:::url-s3-156165"
       },
       {
-        Sid    = "AllowStateAndNativeLockFileAccess"
+        Sid    = "AllowTerraformStateFileAccess"
         Effect = "Allow"
         Action = [
           "s3:GetObject",
@@ -60,70 +60,76 @@ resource "aws_iam_policy" "cicd_s3_policy" {
         Resource = "arn:aws:s3:::url-s3-156165/prod/*"
       },
       {
-        Sid    = "AllowRoute53Access"
+        Sid    = "AllowTerraformInfrastructureManagement"
         Effect = "Allow"
         Action = [
-          "route53:ListHostedZones",
-          "route53:GetHostedZone",
-          "route53:ListResourceRecordSets",
-          "route53:ChangeResourceRecordSets",
-          "route53:ListTagsForResource"
-        ]
-        Resource = "*"
-      },
-      {
-        Sid    = "AllowACMCertificateAccess"
-        Effect = "Allow"
-        Action = [
-          "acm:RequestCertificate",
-          "acm:DescribeCertificate",
-          "acm:DeleteCertificate",
-          "acm:AddTagsToCertificate",
-          "acm:RemoveTagsFromCertificate",
-          "acm:ListTagsForCertificate"
-        ]
-        Resource = "*"
-      },
-      {
-        Sid    = "AllowECSAndALBAndRDSManagement"
-        Effect = "Allow"
-        Action = [
+          "ec2:*",
           "ecs:*",
+          "ecr:*",
           "elasticloadbalancing:*",
           "rds:*",
-          "kms:DescribeKey",
-          "kms:CreateGrant"
+          "elasticache:*",
+          "sqs:*",
+          "secretsmanager:*",
+          "logs:*",
+          "cloudwatch:*",
+          "application-autoscaling:*",
+          "codedeploy:*",
+          "wafv2:*",
+          "route53:*",
+          "acm:*"
         ]
         Resource = "*"
       },
       {
-        Sid    = "AllowIAMManagement"
+        Sid    = "AllowIAMManagementForTerraform"
         Effect = "Allow"
         Action = [
           "iam:CreateRole",
           "iam:DeleteRole",
           "iam:GetRole",
           "iam:UpdateRole",
+          "iam:UpdateAssumeRolePolicy",
+          "iam:PassRole",
+
           "iam:CreatePolicy",
           "iam:DeletePolicy",
           "iam:GetPolicy",
           "iam:GetPolicyVersion",
           "iam:ListPolicyVersions",
+
           "iam:AttachRolePolicy",
           "iam:DetachRolePolicy",
           "iam:ListAttachedRolePolicies",
+
+          "iam:PutRolePolicy",
+          "iam:GetRolePolicy",
+          "iam:DeleteRolePolicy",
+          "iam:ListRolePolicies",
+
+          "iam:ListInstanceProfilesForRole",
+
           "iam:TagRole",
           "iam:UntagRole",
+          "iam:ListRoleTags",
           "iam:TagPolicy",
-          "iam:UntagPolicy",
-          "iam:ListRolePolicies"
+          "iam:UntagPolicy"
+        ]
+        Resource = "*"
+      },
+      {
+        Sid    = "AllowKMSForAWSManagedKeys"
+        Effect = "Allow"
+        Action = [
+          "kms:DescribeKey",
+          "kms:CreateGrant",
+          "kms:ListAliases"
         ]
         Resource = "*"
       }
     ]
   })
 }
-
 
 resource "aws_iam_role_policy_attachment" "cicd_s3_policy_attachment" {
   role       = aws_iam_role.cicd_role.name
