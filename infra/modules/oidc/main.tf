@@ -36,7 +36,7 @@ resource "aws_iam_role_policy_attachment" "cicd_attachment" {
 
 resource "aws_iam_policy" "cicd_s3_policy" {
   name        = "cicd-s3-state-policy"
-  description = "Grants permissions for S3 remote state, native state locking, and Route53 validations"
+  description = "Grants permissions for S3 state, Route53, ACM certificates, and IAM infrastructure updates"
 
   policy = jsonencode({
     Version = "2012-10-17"
@@ -70,10 +70,48 @@ resource "aws_iam_policy" "cicd_s3_policy" {
           "route53:ListTagsForResource"
         ]
         Resource = "*"
+      },
+      # ADD THIS BLOCK FOR ACM CERTIFICATE MANAGEMENT
+      {
+        Sid    = "AllowACMCertificateAccess"
+        Effect = "Allow"
+        Action = [
+          "acm:RequestCertificate",
+          "acm:DescribeCertificate",
+          "acm:DeleteCertificate",
+          "acm:AddTagsToCertificate",
+          "acm:RemoveTagsFromCertificate"
+        ]
+        Resource = "*"
+      },
+      # ADD THIS BLOCK TO ALLOW CREATING MODULE.IAM ROLES AND POLICIES
+      {
+        Sid    = "AllowIAMManagement"
+        Effect = "Allow"
+        Action = [
+          "iam:CreateRole",
+          "iam:DeleteRole",
+          "iam:GetRole",
+          "iam:UpdateRole",
+          "iam:CreatePolicy",
+          "iam:DeletePolicy",
+          "iam:GetPolicy",
+          "iam:GetPolicyVersion",
+          "iam:ListPolicyVersions",
+          "iam:AttachRolePolicy",
+          "iam:DetachRolePolicy",
+          "iam:ListAttachedRolePolicies",
+          "iam:TagRole",
+          "iam:UntagRole",
+          "iam:TagPolicy",
+          "iam:UntagPolicy"
+        ]
+        Resource = "*"
       }
     ]
   })
 }
+
 
 
 resource "aws_iam_role_policy_attachment" "cicd_s3_policy_attachment" {
