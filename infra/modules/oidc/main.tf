@@ -80,7 +80,19 @@ resource "aws_iam_policy" "cicd_s3_policy" {
           "acm:DeleteCertificate",
           "acm:AddTagsToCertificate",
           "acm:RemoveTagsFromCertificate",
-          "acm:ListTagsForCertificate" # <-- ADD THIS LINE
+          "acm:ListTagsForCertificate"
+        ]
+        Resource = "*"
+      },
+      {
+        Sid    = "AllowECSAndALBAndRDSManagement"
+        Effect = "Allow"
+        Action = [
+          "ecs:*",
+          "elasticloadbalancing:*",
+          "rds:*",
+          "kms:DescribeKey",
+          "kms:CreateGrant"
         ]
         Resource = "*"
       },
@@ -104,7 +116,7 @@ resource "aws_iam_policy" "cicd_s3_policy" {
           "iam:UntagRole",
           "iam:TagPolicy",
           "iam:UntagPolicy",
-          "iam:ListRolePolicies" # <-- ADD THIS LINE
+          "iam:ListRolePolicies"
         ]
         Resource = "*"
       }
