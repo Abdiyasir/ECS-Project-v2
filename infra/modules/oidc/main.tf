@@ -71,7 +71,6 @@ resource "aws_iam_policy" "cicd_s3_policy" {
         ]
         Resource = "*"
       },
-      # ADD THIS BLOCK FOR ACM CERTIFICATE MANAGEMENT
       {
         Sid    = "AllowACMCertificateAccess"
         Effect = "Allow"
@@ -80,11 +79,11 @@ resource "aws_iam_policy" "cicd_s3_policy" {
           "acm:DescribeCertificate",
           "acm:DeleteCertificate",
           "acm:AddTagsToCertificate",
-          "acm:RemoveTagsFromCertificate"
+          "acm:RemoveTagsFromCertificate",
+          "acm:ListTagsForCertificate" # <-- ADD THIS LINE
         ]
         Resource = "*"
       },
-      # ADD THIS BLOCK TO ALLOW CREATING MODULE.IAM ROLES AND POLICIES
       {
         Sid    = "AllowIAMManagement"
         Effect = "Allow"
@@ -104,14 +103,14 @@ resource "aws_iam_policy" "cicd_s3_policy" {
           "iam:TagRole",
           "iam:UntagRole",
           "iam:TagPolicy",
-          "iam:UntagPolicy"
+          "iam:UntagPolicy",
+          "iam:ListRolePolicies" # <-- ADD THIS LINE
         ]
         Resource = "*"
       }
     ]
   })
 }
-
 
 
 resource "aws_iam_role_policy_attachment" "cicd_s3_policy_attachment" {
