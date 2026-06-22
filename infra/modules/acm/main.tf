@@ -1,7 +1,7 @@
 data "aws_route53_zone" "hosted_zone" {
   name         = var.dns_name
   private_zone = false
-  
+
 }
 
 resource "aws_acm_certificate" "cert" {
