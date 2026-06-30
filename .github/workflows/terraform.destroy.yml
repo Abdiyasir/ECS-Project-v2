@@ -1,6 +1,12 @@
 name: Terraform Destroy Pipeline
 on:
   workflow_dispatch:
+    inputs:
+      confirm_destroy:
+        description: "Type DESTROY to confirm"
+        required: true
+        default: "NO"
+
 
 permissions:
   id-token: write
@@ -12,6 +18,7 @@ env:
 
 jobs:
   destroy:
+    if: github.event.inputs.confirm_destroy == 'DESTROY'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
