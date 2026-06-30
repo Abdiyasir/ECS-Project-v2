@@ -5,7 +5,7 @@ resource "random_password" "db_password" {
 }
 
 resource "aws_secretsmanager_secret" "database_url" {
-  name = "url-shortener-rds"
+  name                    = "url-shortener-rds"
   recovery_window_in_days = 0
 
 }
