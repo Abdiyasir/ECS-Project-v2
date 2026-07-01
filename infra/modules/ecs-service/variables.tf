@@ -116,7 +116,7 @@ variable "sqs_queue_url" {
 
 variable "database_secret_arn" {
   type    = string
-  default = "Secret for Database URL"
+  description = "Secret for Database URL"
 }
 
 variable "dashboard_sg" {

@@ -1,0 +1,49 @@
+{
+  "family": "api-app",
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "256",
+  "memory": "512",
+  "executionRoleArn": "arn:aws:iam::306758374042:role/ecs-task-execution-role",
+  "taskRoleArn": "arn:aws:iam::306758374042:role/ecs-task-role",
+  "containerDefinitions": [
+    {
+      "name": "api_container",
+      "image": "placeholder",
+      "essential": true,
+      "portMappings": [
+        {
+          "containerPort": 8080,
+          "protocol": "tcp"
+        }
+      ],
+      "environment": [
+        {
+          "name": "CACHE_TTL_SECONDS",
+          "value": "300"
+        },
+        {
+          "name": "BASE_URL",
+          "value": "https://abdiyasir-ecsv2.org"
+        },
+
+        {
+          "name": "REDIS_URL",
+          "value": "https://abdiyasir-ecsv2.org"
+        },
+
+        {
+          "name": "SQS_QUEUE_URL",
+          "value": "https://abdiyasir-ecsv2.org"
+        }
+        
+      ],
+      "secrets": [
+        {
+          "name": "DATABASE_URL",
+          "valueFrom": "arn:aws:secretsmanager:eu-west-2:306758374042:secret:url-rds-password"
+        }
+      ]
+    }
+  ]
+}
