@@ -115,7 +115,7 @@ variable "sqs_queue_url" {
 }
 
 variable "database_secret_arn" {
-  type    = string
+  type        = string
   description = "Secret for Database URL"
 }
 
